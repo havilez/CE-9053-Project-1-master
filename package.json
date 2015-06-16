@@ -1,0 +1,23 @@
+{
+  "name": "my-world-js",
+  "version": "0.0.1",
+  "description": "write code to get tests to pass",
+  "main": "index.js",
+  "scripts": {
+    "test": "karma start"
+  },
+  "author": "Eric P Katz",
+  "license": "ISC",
+  "devDependencies": {
+    "jasmine-core": "^2.3.4",
+    "karma": "^0.12.36",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-jasmine": "^0.3.5",
+    "karma-phantomjs-launcher": "^0.2.0",
+    "karma-requirejs": "^0.2.2",
+    "karma-story-reporter": "^0.3.1",
+    "lodash": "^3.9.3",
+    "phantomjs": "^1.9.17",
+    "requirejs": "^2.1.18"
+  }
+}

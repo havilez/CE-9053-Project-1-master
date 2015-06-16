@@ -1,0 +1,25 @@
+{
+  "name": "Project 1",
+  "version": "0.0.1",
+  "authors": [
+    "Eric Katz <ericpkatz@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "lodash": "~3.9.3"
+  },
+  "description": "Mean Stack development  Project 1",
+  "main": "SpecRunner.html",
+  "keywords": [
+    "lodash"
+  ],
+  "homepage": "SpecRunner.html"
+}
