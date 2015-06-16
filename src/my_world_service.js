@@ -9,6 +9,10 @@ Thing.prototype.available = function () {
     return this.isAvailable = this.numberInStock ? true : false;
 }
 
+Thing.prototype.isOwned = function () {
+     return this.numberOwned ? true : false;
+}
+
 var Person = function(parms) {
      this.name = parms.name,
     this.active = parms.active,
@@ -240,12 +244,82 @@ MyWorldService.prototype.returnThing = function (person,thing) {
 };
 
 
-MyWorldService.prototype.getPeopleWhoOwnThing = function (thingName) {
+MyWorldService.prototype.getPeopleWhoOwnNothing = function () {
 
     // get all people
-    var allPeople = this.getPeople();
+    var allPeople = this.people;
+    var nonOwners = [];
 
     // find list of people who have specified thing
     // if person has thing then add person name to list
+    for (var i=0;i< allPeople.length; i++)
+    {
+        // chk if people own specified thing
+        if ( allPeople[i].things.length == 0 )
+        {
+            var name = allPeople[i];
+            nonOwners.push( allPeople[i]);
+        }
+    };
 
+    return nonOwners;
+
+
+
+};
+
+
+MyWorldService.prototype.getPeopleWhoOwnThing = function (thingName) {
+
+    // get all people
+    var allPeople = this.people;
+    var owners =[]
+
+    // find list of people who have specified thing
+    // if person has thing then add person name to list
+    for (var i=0;i< allPeople.length; i++)
+    {
+        // chk if people own specified thing
+        if (allPeople[i].hasThing(thingName))
+        {
+            owners.push(allPeople[i]);
+        }
+
+    }
+
+    return owners;
+
+};
+
+
+MyWorldService.prototype.getThingsNotOwned = function () {
+
+    var allThings = this.things;
+    var thingsNotOwned = [];
+
+    for ( var i=0; i < allThings.length; i++)
+    {
+        if (( allThings[i].numberOwned == 0) || ( allThings[i].numberOwned == undefined)) {
+
+            thingsNotOwned.push(allThings[i]);
+        }
+    }
+
+    return thingsNotOwned;
+};
+
+MyWorldService.prototype.getThingsOwned = function () {
+
+    var allThings = this.things;
+    var thingsOwned = [];
+
+    for ( var i=0; i < allThings.length; i++)
+    {
+        if ( allThings[i].numberOwned ) {
+
+            thingsOwned.push(allThings[i]);
+        }
+    }
+
+    return thingsOwned;
 };
