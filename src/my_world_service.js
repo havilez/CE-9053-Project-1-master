@@ -1,22 +1,26 @@
 var Thing = function(parms){
-    this.name = parms.name,
-    this.numberInStock = parms.numberInStock,
-    this.numberOwned= parms.numberOwned  // by a person
-    this.isAvailable = parms.numberInStock ? true : false;
+
+    var defParms = { 'name': 'Rock', 'numberInStock' : 0, 'numberOwned' : 0};
+
+    var values = _.assign(defParms,parms);
+    this.name = values.name,
+    this.numberInStock = values.numberInStock,
+    this.numberOwned= values.numberOwned;  // by a person
+    this.isAvailable = values.numberInStock ? true : false;
 };
 
 Thing.prototype.available = function () {
     return this.isAvailable = this.numberInStock ? true : false;
-}
+};
 
 Thing.prototype.isOwned = function () {
      return this.numberOwned ? true : false;
-}
+};
 
 var Person = function(parms) {
      this.name = parms.name,
     this.active = parms.active,
-    this.things= parms.things
+    this.things= parms.things;
 
     if ( parms.things === undefined)
     {
@@ -30,21 +34,26 @@ Person.prototype.hasThing = function(thingName)
 {
     // change to use lodash....
     foundThing = false;
-    var personHasThing = [];
-  //  personHasThing = _.filter(this.things, thingName);
+   var personHasThing = _.forEach(this.things, function(name){
+        if (thingName  === name)
+        return false;
+});
 
+   if  ( personHasThing.length !== 0)
+        foundThing = true;
+/**
     for (var i=0;i<this.things.length; i++)
     {
         if (thingName != this.things[i])
         {
-            continue;
+
         }
         else {
             foundThing = true;
         }
     }
 
-
+**/
 
 
     return foundThing;
@@ -64,20 +73,9 @@ var MyWorldService = function(people,things)
 
 
 
-MyWorldService.prototype.getPeople = function(active){
-    activePeople = [];
+MyWorldService.prototype.getPeople = function(){
 
-    // change to use lodash....
-    if ( active != undefined) {
-        for (var i = 0; i < this.people.length; i++)
-            if (this.people[i].active == active)
-                activePeople.push(this.people[i]);
-    }
-    else
-    {
-        activePeople =this.people;
-    }
-    return activePeople;
+    return this.people;
 
 };
 
@@ -85,20 +83,21 @@ MyWorldService.prototype.getPerson = function( name ){
     var foundPerson = {};
 
     // change to use lodash....
+
+
     for ( var i=0; i< this.people.length; i++)
     {
         if ( this.people[i].name !== name )
         {
-            continue;
+
         }
         else
         {
             foundPerson = this.people[i];
         }
 
-    };
-
-   return foundPerson;
+    }
+    return foundPerson;
 
 };
 
@@ -116,15 +115,14 @@ MyWorldService.prototype.getThing = function( name ){
     {
         if ( this.things[i].name !== name )
         {
-            continue;
+
         }
         else
         {
             foundThing = this.things[i];
         }
 
-    };
-
+    }
     return foundThing;
 
 };
@@ -187,8 +185,7 @@ MyWorldService.prototype.acquireThing = function (person,thing) {
 
 
 
-    };
-
+    }
     return true;
 };
 
@@ -209,7 +206,7 @@ MyWorldService.prototype.returnThing = function (person,thing) {
     });
 
     if (personHasThing.length === 0) {
-        msg = 'Person ' + person + 'does not own a ' + thing + 'to return'
+        msg = 'Person ' + person + 'does not own a ' + thing + 'to return';
         throw new Error(msg);
     }
 
@@ -231,10 +228,7 @@ MyWorldService.prototype.returnThing = function (person,thing) {
         var i = foundPerson.things.indexOf(thing);
         if(i != -1) {
             foundPerson.things.splice(i, 1);
-        };
-
-
-
+        }
     }
 
 
@@ -260,8 +254,7 @@ MyWorldService.prototype.getPeopleWhoOwnNothing = function () {
             var name = allPeople[i];
             nonOwners.push( allPeople[i]);
         }
-    };
-
+    }
     return nonOwners;
 
 
@@ -273,7 +266,7 @@ MyWorldService.prototype.getPeopleWhoOwnThing = function (thingName) {
 
     // get all people
     var allPeople = this.people;
-    var owners =[]
+    var owners =[];
 
     // find list of people who have specified thing
     // if person has thing then add person name to list
