@@ -1,64 +1,6 @@
-var Thing = function(parms){
-
-    var defParms = { 'name': 'Rock', 'numberInStock' : 0, 'numberOwned' : 0};
-
-    var values = _.assign(defParms,parms);
-    this.name = values.name,
-    this.numberInStock = values.numberInStock,
-    this.numberOwned= values.numberOwned;  // by a person
-    this.isAvailable = values.numberInStock ? true : false;
-};
-
-Thing.prototype.available = function () {
-    return this.isAvailable = this.numberInStock ? true : false;
-};
-
-Thing.prototype.isOwned = function () {
-     return this.numberOwned ? true : false;
-};
-
-var Person = function(parms) {
-     this.name = parms.name,
-    this.active = parms.active,
-    this.things= parms.things;
-
-    if ( parms.things === undefined)
-    {
-        this.things = [];
-    }
-
-};
 
 
-Person.prototype.hasThing = function(thingName)
-{
-    // change to use lodash....
-    foundThing = false;
-   var personHasThing = _.forEach(this.things, function(name){
-        if (thingName  === name)
-        return false;
-});
-
-   if  ( personHasThing.length !== 0)
-        foundThing = true;
-/**
-    for (var i=0;i<this.things.length; i++)
-    {
-        if (thingName != this.things[i])
-        {
-
-        }
-        else {
-            foundThing = true;
-        }
-    }
-
-**/
-
-
-    return foundThing;
-
-};
+//FIX-ME: mov all lodash usage from spec to service
 
 
 var MyWorldService = function(people,things)
@@ -73,9 +15,15 @@ var MyWorldService = function(people,things)
 
 
 
-MyWorldService.prototype.getPeople = function(){
+MyWorldService.prototype.getPeople = function(active){
 
-    return this.people;
+    var myPeople;
+    if ( active == true)
+       myPeople =  _.filter(this.people, 'active');
+    else
+      myPeople = this.people;
+
+    return myPeople;
 
 };
 

@@ -1,5 +1,7 @@
 /*globals describe beforeEach it expect Thing MyWorldService Person */
+// using closure to access variables in describe function
 describe("MyWorldService", function() {
+
   var rock, paper, scissors;
   var moe, larry, curly, shep;
   var service;
@@ -71,8 +73,9 @@ describe("MyWorldService", function() {
       var people = [moe, larry, curly, shep];
       var things = [rock, paper, scissors];
       var service = new MyWorldService(people, things);
+      activePeople = service.getPeople(true);
       allPeople = service.getPeople();
-     activePeople=  _.filter(allPeople, 'active');
+    // activePeople=  _.filter(allPeople, 'active');
 
     });
     it("returns people in alpha order", function() {

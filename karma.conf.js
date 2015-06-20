@@ -13,7 +13,7 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
 
-    // list of files / patterns to load in the browser
+    // list of files / patterns to load in the browser -- ORDER of LOADING MATTERS
     files: [
       'vendor/lodash/lodash.js',
       'src/*.js',
