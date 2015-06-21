@@ -24,22 +24,15 @@ MyWorldService.prototype.getPeople = function(active){
 MyWorldService.prototype.getPerson = function( name ){
     var foundPerson = {};
 
-    // change to use lodash....
 
-
-    for ( var i=0; i< this.people.length; i++)
-    {
-        if ( this.people[i].name !== name )
-        {
-            continue;
+    _.forEach(this.people, function(obj) {
+        if (obj.name == name) {
+            foundPerson = obj;
+            return false;
         }
-        else
-        {
-            foundPerson = this.people[i];
-            break;
-        }
+    });
 
-    }
+
     return foundPerson;
 
 };
@@ -51,33 +44,16 @@ MyWorldService.prototype.getThings = function () {
 
 MyWorldService.prototype.getThing = function( thingName ){
 
-    // change to use lodash....
-    var thing, foundThing=false;
 
-    /**
-     foundThing = _.forEach(this.things, function(name) {
-        if (name == thingName)
+    var thing, foundThing={};
+
+
+      _.forEach(this.things, function(obj) {
+        if (obj.name == thingName) {
+            foundThing = obj;
             return false;
+        }
     });
-
-    if  ( foundThing.length !== 0)
-        foundThing = true;
-**/
-
-
-    for ( var i=0; i< this.things.length; i++)
-    {
-        if ( this.things[i].name !== thingName )
-        {
-            continue;
-        }
-        else
-        {
-            foundThing = this.things[i];
-            break;
-        }
-
-    }
 
     return foundThing;
 
@@ -167,11 +143,11 @@ MyWorldService.prototype.getPeopleWhoOwnNothing = function () {
     var allPeople = this.people;
     var nonOwners = [];
 
-    // find list of people who have specified thing
-    // if person has thing then add person name to list
+
+    // find list of people who own nothing
     for (var i=0;i< allPeople.length; i++)
     {
-        // chk if people own specified thing
+
         if ( allPeople[i].things.length == 0 )
         {
             var name = allPeople[i];
