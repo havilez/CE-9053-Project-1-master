@@ -16,3 +16,7 @@
 * run bower install to install bower modules
 * run karma start
 * max score 33
+
+ADDED NOTE:
+TO RUN USING karma copy orig_karma.conf.js into karma.conf.js
+this is needed since I use karma.conf.js compatible with WebStorm

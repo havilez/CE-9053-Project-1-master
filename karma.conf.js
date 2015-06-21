@@ -17,7 +17,7 @@ module.exports = function(config) {
     files: [
       'vendor/lodash/lodash.js',
       'src/*.js',
-      'spec/app/my_world_service_spec.js'
+      'spec/app/*.js'
     ],
 
 
@@ -33,7 +33,7 @@ module.exports = function(config) {
 
 
     // test results reporter to use
-    // possible values: 'dots', 'progress'
+    // possiblegit values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
 

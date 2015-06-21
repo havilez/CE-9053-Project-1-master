@@ -16,7 +16,8 @@ MyWorldService.prototype.getPeople = function(active){
     else
       myPeople = this.people;
 
-    return myPeople;
+    return _.sortBy(myPeople,'name');
+  //  return myPeople;
 
 };
 
@@ -44,7 +45,8 @@ MyWorldService.prototype.getPerson = function( name ){
 };
 
 MyWorldService.prototype.getThings = function () {
-    return this.things;
+   // return this.things;
+    return  _.sortBy(this.things,'name');
 };
 
 MyWorldService.prototype.getThing = function( thingName ){

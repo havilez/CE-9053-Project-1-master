@@ -75,17 +75,17 @@ describe("MyWorldService", function() {
       var service = new MyWorldService(people, things);
       activePeople = service.getPeople(true);
       allPeople = service.getPeople();
-    // activePeople=  _.filter(allPeople, 'active');
+
 
     });
     it("returns people in alpha order", function() {
 
-      allPeople =_.sortBy(allPeople,'name');
+
       expect(allPeople).toEqual([curly, larry, moe, shep]);
     });
     describe("passing in true for active", function() {
       it("returns only active people", function() {
-        activePeople =_.sortBy(activePeople,'name');
+
         expect(activePeople).toEqual([curly, larry, moe]);
       });
     });
@@ -117,7 +117,7 @@ describe("MyWorldService", function() {
       _things = service.getThings();
     });
     it("returns Paper, Rock, Scissors", function() {
-      _things = _.sortBy(_things,'name');
+
       expect(_things).toEqual([paper, rock, scissors]);
     });
   });
