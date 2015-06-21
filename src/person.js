@@ -14,7 +14,7 @@ var Person = function(parms) {
 Person.prototype.hasThing = function(thingName)
 {
     // change to use lodash....
-    foundThing = false;
+    var foundThing = false;
     var personHasThing = _.forEach(this.things, function(name){
         if (thingName  === name)
             return false;
@@ -22,19 +22,7 @@ Person.prototype.hasThing = function(thingName)
 
     if  ( personHasThing.length !== 0)
         foundThing = true;
-    /**
-     for (var i=0;i<this.things.length; i++)
-     {
-         if (thingName != this.things[i])
-         {
 
-         }
-         else {
-             foundThing = true;
-         }
-     }
-
-     **/
 
 
     return foundThing;

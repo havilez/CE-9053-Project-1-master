@@ -1,8 +1,4 @@
 
-
-//FIX-ME: mov all lodash usage from spec to service
-
-
 var MyWorldService = function(people,things)
 {
     this.people = people,
@@ -10,9 +6,6 @@ var MyWorldService = function(people,things)
 
 
 };
-
-
-
 
 
 MyWorldService.prototype.getPeople = function(active){
@@ -37,11 +30,12 @@ MyWorldService.prototype.getPerson = function( name ){
     {
         if ( this.people[i].name !== name )
         {
-
+            continue;
         }
         else
         {
             foundPerson = this.people[i];
+            break;
         }
 
     }
@@ -53,24 +47,36 @@ MyWorldService.prototype.getThings = function () {
     return this.things;
 };
 
-MyWorldService.prototype.getThing = function( name ){
-    var foundThing = {};
+MyWorldService.prototype.getThing = function( thingName ){
 
     // change to use lodash....
+    var thing, foundThing=false;
+
+    /**
+     foundThing = _.forEach(this.things, function(name) {
+        if (name == thingName)
+            return false;
+    });
+
+    if  ( foundThing.length !== 0)
+        foundThing = true;
+**/
 
 
     for ( var i=0; i< this.things.length; i++)
     {
-        if ( this.things[i].name !== name )
+        if ( this.things[i].name !== thingName )
         {
-
+            continue;
         }
         else
         {
             foundThing = this.things[i];
+            break;
         }
 
     }
+
     return foundThing;
 
 };
@@ -80,8 +86,8 @@ MyWorldService.prototype.acquireThing = function (person,thing) {
 
     // TODO: validate parameters here
 
-    var foundThing, personHasThing;
-    var foundPerson = this.getPerson( person );
+    var foundThings, personHasThing;
+    var validPerson = this.getPerson( person );
 
 
     // Does service have any remaining inventory of that thing.
@@ -90,15 +96,7 @@ MyWorldService.prototype.acquireThing = function (person,thing) {
         throw new Error("No Remaining Inventory for ", thing);
 
 
-
-    //this.numberInStock = parms.numberInStock,
-    // this.numberOwned= parms.numberOwned
-
-
-
-    // Does person have any things
-
-    if ( ( Object.getOwnPropertyNames(foundPerson).length === 0) || (foundPerson === undefined)) {
+    if ( ( Object.getOwnPropertyNames(validPerson).length === 0) || (validPerson === undefined)) {
         return false;
     }
     else {
@@ -107,31 +105,9 @@ MyWorldService.prototype.acquireThing = function (person,thing) {
         serviceThingObj.numberInStock--;
 
         // update person's things
-        var foundThings = foundPerson.things;
-
-        if ( foundThings.length === 0 ){
-                foundThings.push(serviceThingObj.name);
-            }
-        else {
-             // foundPerson.getThing(thing.name);
-            // personHasThing = _.find(foundThings, thing);
-            personHasThing=_.forEach(foundThings, function(name){
-                if ( name === thing)
-                  return false;
-
-            });
-
-             // update person's things -- allow duplicates in list
-         //    if (Object.getOwnPropertyNames(personHasThing).length === 0) {
-                 foundThings.push(thing);
-         //    }
-
-
-
-
-         }
-
-
+        foundThings = validPerson.things;
+        // allow duplicates??
+        foundThings.push(thing);
 
     }
     return true;
@@ -139,9 +115,6 @@ MyWorldService.prototype.acquireThing = function (person,thing) {
 
 MyWorldService.prototype.returnThing = function (person,thing) {
 
-
-    //this.numberInStock = parms.numberInStock,
-    // this.numberOwned= parms.numberOwned
 
     var foundPerson = this.getPerson( person );
     var msg;

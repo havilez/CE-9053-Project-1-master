@@ -6,11 +6,11 @@ var Thing = function(parms){
     this.name = values.name,
         this.numberInStock = values.numberInStock,
         this.numberOwned= values.numberOwned;  // by a person
-    this.isAvailable = values.numberInStock ? true : false;
+
 };
 
-Thing.prototype.available = function () {
-    return this.isAvailable = this.numberInStock ? true : false;
+Thing.prototype.isAvailable = function () {
+    return this.numberInStock ? true : false;
 };
 
 Thing.prototype.isOwned = function () {

@@ -194,7 +194,7 @@ describe("MyWorldService", function() {
         service.acquireThing("Moe", "Rock");
       });
       it("there are no more Rocks available", function() {
-        expect(service.getThing("Rock").available()).toEqual(false); // available method on thing
+        expect(service.getThing("Rock").isAvailable()).toEqual(false); // available method on thing
       });
       it("throws an exception", function() {
         expect(function() {
@@ -264,7 +264,7 @@ describe("MyWorldService", function() {
         service.acquireThing("Moe", "Rock");
         service.acquireThing("Moe", "Rock");
         var rock = service.getThing("Rock");
-        rockAvailable = rock.available();
+        rockAvailable = rock.isAvailable();
       });
       it("there are no more Rocks available", function() {
         expect(rockAvailable).toEqual(false);
