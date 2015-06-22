@@ -98,6 +98,7 @@ MyWorldService.prototype.returnThing = function (person,thing) {
     var msg;
 
     // check if person own's the thing you want returned to service
+    //Note: person only has list of thing names NOT objects
     var personHasThing = _.forEach(foundPerson.things, function(name){
         if ( name === thing)
             return false;
